@@ -1,0 +1,44 @@
+[
+  {
+    "name": "Hacker News",
+    "url": "https://news.ycombinator.com/rss",
+    "category": "technology",
+    "priority": 5,
+    "max_items": 3
+  },
+  {
+    "name": "TechCrunch",
+    "url": "https://techcrunch.com/feed/",
+    "category": "startups",
+    "priority": 5,
+    "max_items": 3
+  },
+  {
+    "name": "TechCrunch AI",
+    "url": "https://techcrunch.com/category/artificial-intelligence/feed/",
+    "category": "ai",
+    "priority": 5,
+    "max_items": 3
+  },
+  {
+    "name": "MIT Technology Review",
+    "url": "https://www.technologyreview.com/feed/",
+    "category": "ai",
+    "priority": 5,
+    "max_items": 3
+  },
+  {
+    "name": "Wired",
+    "url": "https://www.wired.com/feed/rss",
+    "category": "technology",
+    "priority": 3,
+    "max_items": 3
+  },
+  {
+    "name": "Moneycontrol Latest",
+    "url": "https://www.moneycontrol.com/rss/latestnews.xml",
+    "category": "business",
+    "priority": 2,
+    "max_items": 3
+  }
+]
