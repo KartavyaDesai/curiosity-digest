@@ -299,8 +299,7 @@ def query_jev(article: Article) -> dict:
                     "Excellent"
                 ]
             }
-            }
-        },
+        }
     }
 
     last_exc: Optional[Exception] = None
