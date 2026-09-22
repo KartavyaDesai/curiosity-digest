@@ -1,0 +1,52 @@
+name: Daily Research Digest
+
+on:
+  schedule:
+    # 05:10 UTC = 10:40 IST (UTC+5:30)
+    # */2 on day-of-month = every 2 days, with the caveat that the
+    # cadence can briefly compress to 1 day across a month boundary
+    # (e.g. 30th -> 1st on months ending in an even day). See note
+    # in the PR/chat this was generated from if you need exact 48h spacing.
+    - cron: "10 5 */2 * *"
+  workflow_dispatch: {}   # lets you trigger a manual run from the Actions tab
+
+jobs:
+  run-digest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run digest script
+        env:
+          TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+          USER_PROFILE: ${{ secrets.USER_PROFILE }}
+        run: python digest.py
+
+      # Uploads digest.log regardless of success/failure so you can
+      # inspect the full trace from the Actions run page, not just
+      # the console output.
+      - name: Upload run log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: digest-log-${{ github.run_number }}
+          path: digest.log
+          retention-days: 14
+          if-no-files-found: ignore
