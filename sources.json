@@ -33,12 +33,5 @@
     "category": "technology",
     "priority": 3,
     "max_items": 3
-  },
-  {
-    "name": "Moneycontrol Latest",
-    "url": "https://www.moneycontrol.com/rss/latestnews.xml",
-    "category": "business",
-    "priority": 2,
-    "max_items": 3
   }
 ]
